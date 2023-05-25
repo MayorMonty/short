@@ -27,7 +27,9 @@ export default defineConfig({
           action: "/short/",
           method: "GET",
           params: {
-            url: "url"
+            url: "url",
+            title: "url",
+            text: "url"
           }
         }
       }
