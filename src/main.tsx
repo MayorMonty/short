@@ -1,7 +1,6 @@
-import React, { ReactChildren, createContext, useContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useLocalStorage } from "@rehooks/local-storage";
 
 import Home from "./routes/Home.tsx";
 import Prefs from "./routes/Prefs.tsx";
