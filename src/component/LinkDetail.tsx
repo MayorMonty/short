@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, customFetcher, poster } from "../utils/short";
+import { Link, customFetcher } from "../utils/short";
 import { PencilIcon, ShareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useSWR from "swr";
 import useLocalStorage from "@rehooks/local-storage";

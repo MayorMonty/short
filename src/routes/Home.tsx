@@ -1,7 +1,7 @@
-import { CogIcon, LinkIcon } from "@heroicons/react/24/outline";
+import { CogIcon } from "@heroicons/react/24/outline";
 import useLocalStorage from "@rehooks/local-storage";
 import { Link, Navigate } from "react-router-dom";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import {
   poster,
@@ -12,7 +12,7 @@ import {
   customFetcher,
 } from "../utils/short";
 import { useEffect, useRef, useState } from "react";
-import LinkDetail, { LinkShare } from "../component/LinkDetail";
+import { LinkShare } from "../component/LinkDetail";
 import Spinner from "../component/Spinner";
 import { onKeydown } from "../utils/useKeyboardShortcuts";
 
@@ -99,12 +99,9 @@ export const Index: React.FC = () => {
     };
 
     // Imperative update, because API doesn't have consistent URLs
-    const response = await poster(
-      [`/links/${createLinkData?.idString}`, apiKey],
-      {
-        arg: updated,
-      }
-    );
+    await poster([`/links/${createLinkData?.idString}`, apiKey], {
+      arg: updated,
+    });
 
     createLinkReset();
     createLink({ domain: domain.hostname, originalURL: url });

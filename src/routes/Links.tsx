@@ -1,16 +1,9 @@
-import { CogIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
+import { CogIcon } from "@heroicons/react/24/outline";
 import useLocalStorage from "@rehooks/local-storage";
 import { Link, Navigate } from "react-router-dom";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
-import useSWRMutation from "swr/mutation";
-import {
-  poster,
-  Domain,
-  getter,
-  LinkCreateOptions,
-  Link as ShortLink,
-} from "../utils/short";
+import { Domain, getter, Link as ShortLink } from "../utils/short";
 import { useEffect, useState } from "react";
 import LinkDetail from "../component/LinkDetail";
 import VisibleCanary from "../component/VisibleCanary";
@@ -18,24 +11,12 @@ import Spinner from "../component/Spinner";
 
 export const Links: React.FC = () => {
   const [apiKey] = useLocalStorage("options.apiKey", "");
-  const [url, setURL] = useState("");
   const [domain, setDomain] = useState<Domain>();
 
   const { data: domains, error: domainsError } = useSWR<Domain[]>(
     apiKey ? ["/api/domains", apiKey] : null,
     getter
   );
-
-  const {
-    trigger: createLink,
-    data: createLinkData,
-    isMutating: createLinkIsMutating,
-  } = useSWRMutation<
-    ShortLink,
-    any,
-    [string, string] | null,
-    LinkCreateOptions
-  >(apiKey ? ["/links", apiKey] : null, poster);
 
   const links = useSWRInfinite<{
     links: ShortLink[];
@@ -97,7 +78,6 @@ export const Links: React.FC = () => {
             </select>
           </div>
         </div>
-        <Spinner hide={!createLinkIsMutating} />
       </header>
       <main className="mt-8">
         <h1 className="text-lg my-4">Links</h1>
