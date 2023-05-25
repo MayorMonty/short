@@ -8,20 +8,23 @@ import Links from "./routes/Links.tsx";
 
 import "./index.css";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    Component: Home,
-  },
-  {
-    path: "/prefs",
-    Component: Prefs,
-  },
-  {
-    path: "/links",
-    Component: Links,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      Component: Home,
+    },
+    {
+      path: "/prefs",
+      Component: Prefs,
+    },
+    {
+      path: "/links",
+      Component: Links,
+    },
+  ],
+  { basename: import.meta.env.BASE_URL }
+);
 
 export type Settings = {
   apiKey: string;
