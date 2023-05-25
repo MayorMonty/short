@@ -75,7 +75,7 @@ export async function getter<T>([path, apiKey]: [string, string]): Promise<T> {
     headers.set("Authorization", `${apiKey}`);
     headers.set("Accept", "application/json");
 
-    const url = new URL(path, "https://api.short.io/");
+    const url = new URL(path, "https://short-api.bren.app");
 
     const response = await fetch(url, {
         headers
@@ -94,7 +94,7 @@ export async function poster<T, A>([path, apiKey]: [string, string], { arg }: { 
     headers.set("Accept", "application/json");
     headers.set("Content-Type", "application/json")
 
-    const url = new URL(path, "https://api.short.io/");
+    const url = new URL(path, "https://short-api.bren.app");
 
     const response = await fetch(url, {
         headers,
@@ -116,7 +116,7 @@ export function customFetcher<T>(options: RequestInit, postProcess: (response: R
         headers.set("Accept", "application/json");
         headers.set("Content-Type", "application/json")
 
-        const url = new URL(path, "https://api.short.io/");
+        const url = new URL(path, "https://short-api.bren.app");
 
         const response = await fetch(url, {
             headers,
