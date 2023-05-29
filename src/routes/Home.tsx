@@ -53,19 +53,6 @@ export const Index: React.FC = () => {
   }, [domains]);
 
   useEffect(() => {
-    if (!urlInputRef.current) return;
-
-    const params = new URLSearchParams(window.location.search);
-    const url = params.get("url");
-
-    if (!url) {
-      return;
-    }
-
-    setURL(url);
-  }, [urlInputRef]);
-
-  useEffect(() => {
     if (!createLinkData) return;
 
     setPath(createLinkData.path);
@@ -83,14 +70,27 @@ export const Index: React.FC = () => {
   }
 
   async function onURLFocus() {
-    if (!navigator.clipboard) return;
-    if (url.length > 0) return;
+    let parsedUrl = "";
 
-    const contents = await navigator.clipboard.readText();
-    try {
-      const url = new URL(contents);
-      setURL(url.toString());
-    } catch {}
+    // Share Target
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("url")) {
+      parsedUrl = params.get("url")!;
+    }
+
+    // Paste from clipboard
+    if (navigator.clipboard && !parsedUrl) {
+      const clipboard = await navigator.clipboard.readText();
+
+      try {
+        const url = new URL(clipboard);
+        parsedUrl = url.toString();
+      } catch (e) {}
+    }
+
+    if (parsedUrl) {
+      setURL(parsedUrl);
+    }
   }
 
   function onGo() {
