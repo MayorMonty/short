@@ -12,6 +12,9 @@ export default defineConfig({
       scope: "/short/",
       base: "/short/",
       registerType: "autoUpdate",
+      devOptions: {
+        enabled: true,
+      },
       manifest: {
         name: "Short",
         short_name: "Short",
@@ -29,8 +32,8 @@ export default defineConfig({
           method: "GET",
           params: {
             url: "url",
-            title: "url",
-            text: "url"
+            title: "title",
+            text: "text"
           }
         }
       }
