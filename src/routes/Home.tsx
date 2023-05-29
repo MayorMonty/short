@@ -82,6 +82,14 @@ export const Index: React.FC = () => {
     setIsURLValid(valid);
   }
 
+  async function onURLFocus() {
+    const contents = await navigator.clipboard.readText();
+    try {
+      const url = new URL(contents);
+      setURL(url.toString());
+    } catch {}
+  }
+
   function onGo() {
     if (!apiKey || !domain || !url) return;
     createLink({ domain: domain.hostname, originalURL: url });
@@ -155,6 +163,7 @@ export const Index: React.FC = () => {
               value={url}
               onInput={onURLChange}
               onKeyDown={onKeydown({ key: "Enter", callback: onGo })}
+              onFocus={onURLFocus}
             />
             <select
               className="h-full rounded-md py-4 border-x-8 border-x-transparent"
