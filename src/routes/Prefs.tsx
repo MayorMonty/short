@@ -11,9 +11,6 @@ export const Prefs: React.FC = () => {
     getter
   );
 
-  // Developer Info
-  const params = new URLSearchParams(window.location.search);
-
   return (
     <section className=" rounded-md p-4">
       <h1 className="text-lg">Settings</h1>
@@ -56,19 +53,6 @@ export const Prefs: React.FC = () => {
             </ul>
           </>
         )}
-      </section>
-      <section className="mt-8">
-        <h2 className="font-bold">Developer Info</h2>
-        <section className="mt-4">
-          <p>Share Target Info</p>
-          <code className="rounded-md p-4 bg-dark-100 block mt-2">
-            {[...params.entries()].map(([key, value]) => (
-              <p key={key}>
-                <span className="font-bold">{key}</span>: {value}
-              </p>
-            ))}
-          </code>
-        </section>
       </section>
       <nav className="pt-4 flex justify-end">
         <Link to="/" className="button">

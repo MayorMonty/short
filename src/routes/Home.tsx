@@ -21,6 +21,8 @@ export const Index: React.FC = () => {
   const [url, setURL] = useState("");
   const [domain, setDomain] = useState<Domain>();
 
+  const params = new URLSearchParams(window.location.search);
+
   const urlInputRef = useRef<HTMLInputElement>(null);
 
   const { data: domains, error: domainsError } = useSWR<Domain[]>(
@@ -190,6 +192,18 @@ export const Index: React.FC = () => {
           </button>
         </div>
       </header>
+      {params.size > 0 && (
+        <section className="mt-8">
+          <h1 className="text-md font-bold">Share Target</h1>
+          <div className="font-mono bg-dark-100 p-4 rounded-md">
+            {[...params.entries()].map(([key, value]) => (
+              <p key={key}>
+                <span className="font-bold">{key}</span>: {value}
+              </p>
+            ))}
+          </div>
+        </section>
+      )}
       <section className="mt-8">
         <Spinner hide={!createLinkIsMutating} />
         {createLinkData && (
