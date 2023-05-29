@@ -76,8 +76,18 @@ export const Index: React.FC = () => {
 
     // Share Target
     const params = new URLSearchParams(window.location.search);
-    if (params.get("url")) {
-      parsedUrl = params.get("url")!;
+    const keys = ["url", "text", "title"];
+    for (const key of keys) {
+      if (!params.has(key)) continue;
+
+      const value = params.get(key);
+
+      // Search for a URL
+      const match = value?.match(/https?:\/\/\S+/i);
+      if (match) {
+        parsedUrl = match[0];
+        break;
+      }
     }
 
     // Paste from clipboard
