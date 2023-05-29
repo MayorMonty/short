@@ -83,6 +83,9 @@ export const Index: React.FC = () => {
   }
 
   async function onURLFocus() {
+    if (!navigator.clipboard) return;
+    if (url.length > 0) return;
+
     const contents = await navigator.clipboard.readText();
     try {
       const url = new URL(contents);
