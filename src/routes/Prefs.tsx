@@ -5,6 +5,7 @@ import useLocalStorage from "@rehooks/local-storage";
 
 export const Prefs: React.FC = () => {
   const [apiKey, setApiKey] = useLocalStorage("options.apiKey", "");
+  const [devMode, setDevMode] = useLocalStorage("options.devMode", false);
 
   const { data: domains, error } = useSWR<Domain[]>(
     apiKey ? ["/api/domains", apiKey] : null,
@@ -53,6 +54,18 @@ export const Prefs: React.FC = () => {
             </ul>
           </>
         )}
+      </section>
+      <section className="pt-4">
+        <h2 className="text-lg font-bold">Developer Mode</h2>
+        <label>
+          <input
+            type="checkbox"
+            className="mr-2"
+            checked={devMode}
+            onChange={(ev) => setDevMode(ev.currentTarget.checked)}
+          />
+          Enable Developer Mode
+        </label>
       </section>
       <nav className="pt-4 flex justify-end">
         <Link to="/" className="button">

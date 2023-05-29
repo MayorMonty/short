@@ -18,6 +18,7 @@ import { onKeydown } from "../utils/useKeyboardShortcuts";
 
 export const Index: React.FC = () => {
   const [apiKey] = useLocalStorage("options.apiKey", "");
+  const [devMode] = useLocalStorage("options.devMode", false);
   const [url, setURL] = useState("");
   const [domain, setDomain] = useState<Domain>();
 
@@ -202,7 +203,7 @@ export const Index: React.FC = () => {
           </button>
         </div>
       </header>
-      {params.size > 0 && (
+      {devMode && params.size > 0 && (
         <section className="mt-8">
           <h1 className="text-md font-bold">Share Target</h1>
           <div className="font-mono bg-dark-100 p-4 rounded-md">
